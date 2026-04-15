@@ -3,35 +3,49 @@ const zones = document.querySelectorAll('.zone');
 const msg = document.getElementById('msg');
 const timerElement = document.getElementById('timer');
 const scoreElement = document.getElementById('score');
-
-// Botões
 const startBtn = document.getElementById('startBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 const stopBtn = document.getElementById('stopBtn');
+const summaryElement = document.getElementById('game-summary');
+const statsElement = document.getElementById('final-stats');
+const gameArea = document.getElementById('game-area');
 
 const pacotes = [
     { nome: "DADOS DE STREAMING LOCAL", tipo: "fibra" },
     { nome: "DADOS INTERCONTINENTAIS", tipo: "submarino" },
-    { nome: "DADOS DE ÁREA REMOTA", tipo: "satelite" }
+    { nome: "DADOS DE ÁREA REMOTA", tipo: "satelite" },
+    { nome: "TRÁFEGO DE ALTA VELOCIDADE", tipo: "fibra" },
+    { nome: "COMUNICAÇÃO TRANSOCEÂNICA", tipo: "submarino" },
+    { nome: "CONEXÃO EM ALTO MAR", tipo: "satelite" },
+    { nome: "DADOS DE FIBRA RESIDENCIAL", tipo: "fibra" },
+    { nome: "DADOS DE CABO DE COBRE", tipo: "fibra" }
 ];
-
 let pacoteAtual = 0;
 let seconds = 0;
 let points = 0;
 let timerInterval = null;
 let isRunning = false;
+let acertos = [];
+let erros = [];
 
-// Atualiza o contador de tempo e pontos na tela
+function embaralhar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Troca elementos de posição
+    }
+    return array;
+}
+
+// Atualiza placar na tela
 function updateDisplay() {
     timerElement.innerText = `Tempo: ${seconds}s`;
     scoreElement.innerText = `Pontos: ${points}`;
 }
 
-// Funções de Controle do Jogo
+// Iniciar/Retomar o cronômetro
 function startTimer() {
     if (!isRunning) {
         isRunning = true;
-        // Ajuste visual dos botões
         startBtn.style.display = 'none';
         pauseBtn.style.display = 'inline-block';
         stopBtn.style.display = 'inline-block';
@@ -43,6 +57,7 @@ function startTimer() {
     }
 }
 
+// Pausar o cronômetro
 function pauseTimer() {
     isRunning = false;
     clearInterval(timerInterval);
@@ -51,21 +66,37 @@ function pauseTimer() {
     pauseBtn.style.display = 'none';
 }
 
-function stopTimer() {
+// Finalizar o Jogo e exibir resumo
+function finalizarJogo() {
     isRunning = false;
     clearInterval(timerInterval);
-    seconds = 0;
-    points = 0;
-    updateDisplay();
     
-    // Reset visual dos botões
-    startBtn.innerText = "Iniciar Desafio";
+    // Esconde área de jogo e estatísticas do topo
+    if (gameArea) gameArea.style.display = 'none';
+    const statsContainer = document.querySelector('.game-stats');
+    if (statsContainer) statsContainer.style.display = 'none';
+    
+    // Exibe resumo
+    summaryElement.style.display = 'block';
+    
+    const progresso = Math.round(((acertos.length + erros.length) / pacotes.length) * 100);
+    
+    statsElement.innerHTML = `
+        <p>Parabéns! Você concluiu <strong>${progresso}%</strong> do desafio.</p>
+        <p><strong>Acertos:</strong> ${acertos.length > 0 ? acertos.join(', ') : 'Nenhum'}</p>
+        <p><strong>Erros:</strong> ${erros.length > 0 ? erros.join(', ') : 'Nenhum'}</p>
+        <hr style="margin:15px 0; border:0; border-top:1px solid #ffafcc;">
+        <p><strong>Tempo total:</strong> ${seconds}s | <strong>Pontuação:</strong> ${points} pontos</p>
+    `;
+    
+    // Ajusta visibilidade dos botões
+    startBtn.innerText = "Jogar Novamente";
     startBtn.style.display = 'inline-block';
     pauseBtn.style.display = 'none';
     stopBtn.style.display = 'none';
 }
 
-// Lógica do Jogo
+// Lógica de Pacotes
 function atualizarPacote() {
     packet.innerText = "PACOTE: " + pacotes[pacoteAtual].nome;
     packet.dataset.tipo = pacotes[pacoteAtual].tipo;
@@ -76,16 +107,22 @@ function addPoints(valor) {
     updateDisplay();
 }
 
-// Event Listeners dos botões
-startBtn.addEventListener('click', startTimer);
-pauseBtn.addEventListener('click', pauseTimer);
-stopBtn.addEventListener('click', stopTimer);
+// Eventos dos Botões
+startBtn.addEventListener('click', () => {
+    if (startBtn.innerText === "Jogar Novamente") {
+        location.reload();
+    } else {
+        startTimer();
+    }
+});
 
-// Lógica de Drag and Drop
+pauseBtn.addEventListener('click', pauseTimer);
+stopBtn.addEventListener('click', finalizarJogo);
+
+// Drag and Drop
 packet.addEventListener('dragstart', (e) => {
     if (!isRunning) {
-        e.preventDefault(); // Impede arrastar se o jogo estiver pausado
-        alert("Clique em 'Iniciar' para começar!");
+        e.preventDefault();
         return;
     }
     e.dataTransfer.setData('tipo', packet.dataset.tipo);
@@ -93,27 +130,32 @@ packet.addEventListener('dragstart', (e) => {
 
 zones.forEach(zone => {
     zone.addEventListener('dragover', (e) => e.preventDefault());
-
     zone.addEventListener('drop', (e) => {
         if (!isRunning) return;
-
+        
         const tipoPacote = e.dataTransfer.getData('tipo');
         const rotaDestino = zone.getAttribute('data-route');
+        const nomePacote = pacotes[pacoteAtual].nome;
 
         if (rotaDestino === tipoPacote) {
-            msg.innerText = "🚀 Rota estabelecida! +10 pontos";
-            msg.style.color = "#2ecc71";
+            msg.innerText = "🚀 Sucesso! +10 pontos";
+            msg.style.color = "#52b788";
+            acertos.push(nomePacote);
             addPoints(10);
             
             setTimeout(() => {
-                pacoteAtual = (pacoteAtual + 1) % pacotes.length;
-                atualizarPacote();
-                msg.innerText = "";
+                pacoteAtual++;
+                if (pacoteAtual >= pacotes.length) {
+                    finalizarJogo();
+                } else {
+                    atualizarPacote();
+                    msg.innerText = "";
+                }
             }, 1000);
-            
         } else {
-            msg.innerText = "⚠️ Latência alta! -5 pontos";
-            msg.style.color = "#f1c40f";
+            msg.innerText = "⚠️ Latência! -5 pontos";
+            msg.style.color = "#ff4d6d";
+            erros.push(nomePacote);
             addPoints(-5);
         }
     });
@@ -122,3 +164,5 @@ zones.forEach(zone => {
 // Inicialização
 atualizarPacote();
 updateDisplay();
+// Embaralha ao carregar o jogo
+embaralhar(pacotes);

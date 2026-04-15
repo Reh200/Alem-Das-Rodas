@@ -1,39 +1,94 @@
-/* ALÉM DAS RODAS - SANRIO KAWAII EDITION (FINAL) */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
 
 :root {
-    --primary: #ffafcc;      /* Rosa Soft */
-    --accent: #ff4d6d;       /* Vermelho Laço */
-    --secondary: #bde0fe;    /* Azul Cinnamoroll */
-    --success: #52b788;      /* Verde Keroppi */
-    --dark: #5a4a5e;         /* Roxo suave */
-    --bg: #fff0f5;           /* Lavender Blush */
+    --primary: #ffafcc;
+    /* Rosa Soft */
+    --accent: #ff4d6d;
+    /* Vermelho Laço */
+    --secondary: #bde0fe;
+    /* Azul Cinnamoroll */
+    --success: #52b788;
+    /* Verde Keroppi */
+    --dark: #5a4a5e;
+    /* Roxo suave */
+    --bg: #fff0f5;
+    /* Lavender Blush */
     --card: #ffffff;
     --radius: 30px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* Garante que o corpo não tenha scroll */
-/* Garante que o corpo não tenha scroll */
-.game-body {
-    background-color: var(--bg);
-    color: var(--dark);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    height: 100vh;      /* Altura exata da tela */
-    overflow: hidden;   /* BLOQUEIA A ROLAGEM */
-    display: flex;
-    flex-direction: column;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* O wrapper ocupa o restante do espaço disponível sem estourar */
+/* 1. Ajuste no corpo para não permitir rolagem */
+.game-body {
+    background-color: var(--bg);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    /* Isso remove qualquer barra de rolagem */
+    display: flex;
+    flex-direction: column;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    /* Fonte padrão do jogo */
+}
+
+/* 2. Ajuste do Wrapper para ocupar o centro sem estourar */
 .game-wrapper {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     padding: 10px;
-    overflow: hidden;   /* Impede scroll interno */
+    box-sizing: border-box;
+}
+
+/* 3. Ajuste da Arena para telas pequenas */
+.arena {
+    background: var(--card);
+    padding: 20px;
+    border-radius: var(--radius);
+    width: 95%;
+    /* Quase a largura total da tela */
+    max-width: 500px;
+    max-height: 85vh;
+    /* Arena não passa da tela */
+    overflow-y: auto;
+    /* Scroll apenas se o conteúdo interno exceder */
+    box-shadow: 0 10px 30px rgba(255, 175, 204, 0.3);
+}
+
+/* 4. Ajuste dos elementos internos para mobile */
+@media (max-width: 480px) {
+    .arena {
+        padding: 15px;
+    }
+
+    .cargo-element {
+        width: 100%;
+        /* Ocupa a largura disponível */
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .drop-zones {
+        gap: 10px;
+    }
+
+    .zone {
+        padding: 15px 5px;
+        font-size: 0.75rem;
+        /* Fonte menor para caber */
+    }
+
+    .game-stats {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
 }
 
 /* NAVBAR */
@@ -48,8 +103,15 @@
     border-bottom: 2px solid var(--primary);
 }
 
-.logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; }
-.logo strong { color: var(--accent); }
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+.logo strong {
+    color: var(--accent);
+}
 
 .nav-game {
     background: var(--primary);
@@ -63,29 +125,44 @@
     transition: 0.2s;
 }
 
-/* ARENA DE JOGO */
-.game-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.arena {
-    background: var(--card);
-    padding: 20px; /* Reduzido de 40px para 20px para ganhar espaço */
-    border-radius: var(--radius);
-    text-align: center;
-    width: 100%;
-    max-width: 500px; /* Um pouco menor para caber em qualquer celular */
-    box-shadow: 0 10px 30px rgba(255, 175, 204, 0.3);
-    border: 3px solid #ffe4e6;
-    max-height: 85vh; /* Garante que a arena não ultrapasse a tela */
-    overflow-y: auto; /* Permite scroll APENAS dentro da arena se necessário */
-}
-
 /* STATUS */
+#game-summary h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ESTILIZAÇÃO DO CARD DE RESUMO */
+.summary-card {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 3px solid var(--primary);
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(255, 175, 204, 0.2);
+    
+    /* Regras cruciais para evitar scroll */
+    max-height: 70vh;    /* O resumo nunca terá mais que 70% da altura da tela */
+    overflow-y: auto;    /* Se o conteúdo for muito grande, ele cria scroll APENAS dentro do card */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.summary-card h3 {
+    color: var(--accent);
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 15px;
+}
+
+/* Garante que o texto dentro não quebre o layout */
+#final-stats {
+    word-wrap: break-word;
+    font-size: 1rem;
+    color: var(--dark);
+}
+
 .game-stats {
     display: flex;
     justify-content: space-around;
@@ -98,8 +175,13 @@
     border: 2px dashed var(--primary);
 }
 
-#timer { color: var(--accent); }
-#score { color: var(--success); }
+#timer {
+    color: var(--accent);
+}
+
+#score {
+    color: var(--success);
+}
 
 /* BOTÕES */
 .game-controls {
@@ -119,11 +201,27 @@
     transition: all 0.2s;
 }
 
-#startBtn { background-color: var(--primary); color: white; box-shadow: 0 4px 0 #ff88a8; }
-#pauseBtn { background-color: var(--secondary); color: var(--dark); box-shadow: 0 4px 0 #90c2f2; }
-#stopBtn { background-color: #f1f5f9; color: var(--dark); box-shadow: 0 4px 0 #cbd5e1; }
+#startBtn {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 0 #ff88a8;
+}
 
-.game-controls button:hover { transform: translateY(-3px); }
+#pauseBtn {
+    background-color: var(--secondary);
+    color: var(--dark);
+    box-shadow: 0 4px 0 #90c2f2;
+}
+
+#stopBtn {
+    background-color: #f1f5f9;
+    color: var(--dark);
+    box-shadow: 0 4px 0 #cbd5e1;
+}
+
+.game-controls button:hover {
+    transform: translateY(-3px);
+}
 
 /* ELEMENTO E ZONAS */
 .cargo-element {
@@ -156,7 +254,11 @@
     transition: 0.3s;
 }
 
-.zone:hover { background: var(--primary); color: white; border-style: solid; }
+.zone:hover {
+    background: var(--primary);
+    color: white;
+    border-style: solid;
+}
 
 /* FOOTER */
 .main-footer {
@@ -169,21 +271,4 @@
 .main-footer .copyright {
     font-size: 0.7rem;
     color: #94a3b8;
-}
-
-/* RESPONSIVIDADE */
-@media (max-height: 700px) {
-    .arena {
-        padding: 15px;
-        transform: scale(0.9); /* Diminui levemente a escala se a tela for muito baixa */
-    }
-    
-    .cargo-element {
-        margin: 15px auto;
-        padding: 15px;
-    }
-    
-    .drop-zones {
-        margin-top: 15px;
-    }
 }

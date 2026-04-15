@@ -105,19 +105,45 @@ summary::-webkit-details-marker { display: none; }
 /* Conteúdo interno */
 .full-content { margin-top: 20px; padding-top: 20px; border-top: 1px dashed #e2e8f0; font-size: 0.9rem; }
 
-/* RESPONSIVIDADE */
-@media (max-width: 1024px) { .blog-feed { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .blog-feed { grid-template-columns: 1fr; } }
+/* --- RESPONSIVIDADE TOTAL (MOBILE-FIRST) --- */
 
-/* --- RESPONSIVIDADE DO FOOTER --- */
-@media (max-width: 600px) {
-    .main-footer {
-        padding: 15px 10px; /* Reduz o padding para telas muito pequenas */
-        margin-top: 30px;
+/* 1. Ajustes Gerais para Celulares */
+@media (max-width: 768px) {
+    /* Navbar compacta */
+    .navbar { padding: 0 5%; }
+    
+    /* Hero texto menor */
+    .hero { padding: 40px 20px; }
+    .hero h1 { font-size: 1.6rem !important; }
+
+    /* Feed em uma coluna */
+    .blog-feed {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+        padding: 0 15px;
     }
 
+    /* Cards ajustados para leitura vertical */
+    .blog-post { padding: 20px; }
+    
+    /* Ajuste do Footer */
+    .main-footer { padding: 30px 15px; }
+}
+
+/* 2. Ajustes Específicos para Telas Muito Pequenas (Abaixo de 480px) */
+@media (max-width: 480px) {
+    .nav-menu { gap: 15px; }
+    .nav-menu a { font-size: 0.8rem; }
+    
+    /* Remove elementos decorativos se necessário */
+    .hero { padding: 30px 15px; }
+    
+    /* Ajuste de margens globais */
+    body { padding: 0; }
+    
+    /* Otimização do footer */
     .main-footer .copyright {
-        font-size: 0.65rem; /* Ajuste fino para evitar quebra de linha indesejada */
-        line-height: 1.4;
+        font-size: 0.65rem;
+        line-height: 1.3;
     }
 }

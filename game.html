@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Desafio Infoviário | Além das Rodas</title>
     <link rel="stylesheet" href="css/game.css">
 </head>
@@ -26,30 +27,37 @@
             <div class="game-controls">
                 <button id="startBtn">Iniciar Desafio</button>
                 <button id="pauseBtn" style="display:none;">Pausar</button>
-                <button id="stopBtn" style="display:none;">Reiniciar</button>
+                <button id="stopBtn" style="display:none;">Finalizar Jogo</button>
             </div>
 
-            <p>Arraste o pacote de dados para a infraestrutura ideal:</p>
+            <div id="game-area">
+                <p>Arraste o pacote de dados para a infraestrutura ideal:</p>
 
-            <div class="cargo-element" id="packet" draggable="true">PACOTE: DADOS INTERCONTINENTAIS</div>
+                <div class="cargo-element" id="packet" draggable="true">PACOTE: DADOS</div>
 
-            <div class="drop-zones">
-                <div class="zone" data-route="submarino">Cabo Submarino</div>
-                <div class="zone" data-route="fibra">Fibra Óptica</div>
-                <div class="zone" data-route="satelite">Satélite LEO</div>
+                <div class="drop-zones">
+                    <div class="zone" data-route="submarino">Cabo Submarino</div>
+                    <div class="zone" data-route="fibra">Fibra Óptica</div>
+                    <div class="zone" data-route="satelite">Satélite LEO</div>
+                </div>
+                
+                <p id="msg" style="margin-top:20px; font-weight:bold;"></p>
             </div>
-            <p id="msg" style="margin-top:20px; font-weight:bold;"></p>
+
+            <div id="game-summary" class="summary-card">
+                <h3>Resumo do Desafio</h3>
+                <p id="final-stats"></p>
+            </div>
         </div>
     </main>
 
-    <script src="js/game.js"></script>
-
     <footer class="main-footer">
         <p class="copyright">
-            © 2026 Além das Rodas. Dados via ANATEL e RNP. Design por IA Colaborativa.
+            © 2026 Além das Rodas. Dados via ANATEL e RNP.
         </p>
     </footer>
 
+    <script src="js/game.js"></script>
 </body>
 
 </html>
