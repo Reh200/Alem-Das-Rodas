@@ -1,22 +1,46 @@
+/* ALÉM DAS RODAS - SCRIPT CORE V1.0 */
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Sistema Infoviário Inicializado...");
-
-    const buttons = document.querySelectorAll('.btn-read');
-
-    buttons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const title = e.target.parentElement.querySelector('h3').innerText;
-            alert(`Você está acessando dados sobre: ${title}\nRedirecionando via infraestrutura infoviária...`);
+    
+    // 1. SCROLL SUAVE PARA LINKS DE NAVEGAÇÃO
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
         });
     });
 
-    // Efeito de scroll no header
+    // 2. BOTÃO "VOLTAR AO TOPO" (APARECE APÓS SCROLL)
+    const backToTopButton = document.createElement('button');
+    backToTopButton.innerHTML = '↑';
+    backToTopButton.className = 'back-to-top';
+    document.body.appendChild(backToTopButton);
+
     window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.style.background = '#000';
+        if (window.scrollY > 300) {
+            backToTopButton.style.display = 'block';
         } else {
-            header.style.background = '#1a1a2e';
+            backToTopButton.style.display = 'none';
         }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 3. ANIMAÇÃO DE ENTRADA (FADE-IN NOS POSTS)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    });
+
+    document.querySelectorAll('.blog-post').forEach(post => {
+        post.classList.add('fade-in');
+        observer.observe(post);
     });
 });

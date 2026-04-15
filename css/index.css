@@ -1,98 +1,123 @@
+/* ALÉM DAS RODAS - EDITORIAL DESIGN SYSTEM V7.0 */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Montserrat:wght@700;800&display=swap');
+
 :root {
-    --primary: #00d2ff;
-    --dark: #1a1a2e;
-    --light: #ffffff;
+    --primary: #ff85a2;      
+    --accent: #ff4d6d;       
+    --dark: #2d1b2e;         
+    --bg: #fdf5f7;           
+    --card: #ffffff;
+    --text-body: #475569;
+    --radius-lg: 24px;
+    --shadow-soft: 0 10px 25px -5px rgba(255, 133, 162, 0.15);
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #0f3460;
-    color: var(--light);
-    margin: 0;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background-color: var(--bg); 
+    color: var(--text-body); 
+    line-height: 1.6; 
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* NAVBAR */
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 10%; 
+    height: 80px; 
+    background: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(10px); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 1px solid rgba(255, 133, 162, 0.15); 
 }
 
-header {
-    background: var(--dark);
-    padding: 1rem 0;
-    border-bottom: 2px solid var(--primary);
-}
+.logo { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--dark); }
+.logo strong { color: var(--primary); }
+.nav-menu { list-style: none; display: flex; align-items: center; gap: 30px; }
+.nav-menu a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; }
+.nav-game { background: var(--primary); color: white !important; padding: 8px 20px; border-radius: 50px; }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/* HERO */
+.hero { background: linear-gradient(135deg, #ffc8dd, #ffa5b9); padding: 60px 20px; text-align: center; color: white; }
+.hero h1 { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
+/* GRID DE 3 COLUNAS */
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.hero {
-    height: 300px;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../img/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-#posts-container {
+.blog-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: -50px; /* Efeito de sobreposição */
-    padding-bottom: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: stretch;
 }
 
-.card {
-    background: var(--dark);
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s;
+.blog-post {
+    background: var(--card);
+    padding: 25px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
 }
 
-.card:hover {
-    transform: translateY(-10px);
+/* Estrutura flexível para igualar altura */
+.blog-post details { display: flex; flex-direction: column; height: 100%; cursor: pointer; }
+.blog-post summary { display: flex; flex-direction: column; height: 100%; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+
+/* TÍTULOS E IMAGENS */
+.post-thumb { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+
+.blog-post h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: var(--dark);
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 3px solid var(--primary);
+    min-height: 3rem; /* Alinhamento vertical forçado */
 }
 
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.btn-read {
-    background: var(--primary);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-footer {
-    background: var(--dark);
+/* FOOTER MINIMALISTA */
+.main-footer {
     text-align: center;
-    padding: 2rem;
+    padding: 20px;
+    background: #ffffff;
+    border-top: 1px solid rgba(255, 133, 162, 0.1);
+    margin-top: 40px;
+}
+
+.main-footer .copyright {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+}
+
+.post-meta { font-size: 0.7rem; color: var(--primary); font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+.summary-text { font-size: 0.85rem; color: var(--text-body); margin-bottom: 10px; flex-grow: 1; }
+
+/* Conteúdo interno */
+.full-content { margin-top: 20px; padding-top: 20px; border-top: 1px dashed #e2e8f0; font-size: 0.9rem; }
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) { .blog-feed { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .blog-feed { grid-template-columns: 1fr; } }
+
+/* --- RESPONSIVIDADE DO FOOTER --- */
+@media (max-width: 600px) {
+    .main-footer {
+        padding: 15px 10px; /* Reduz o padding para telas muito pequenas */
+        margin-top: 30px;
+    }
+
+    .main-footer .copyright {
+        font-size: 0.65rem; /* Ajuste fino para evitar quebra de linha indesejada */
+        line-height: 1.4;
+    }
 }

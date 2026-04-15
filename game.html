@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Desafio Infoviário | Além das Rodas</title>
+    <link rel="stylesheet" href="css/game.css">
+</head>
+
+<body class="game-body">
+
+    <nav class="navbar">
+        <div class="logo">ALÉM <strong>DAS RODAS</strong></div>
+        <a href="index.html" class="nav-game">← Voltar ao Blog</a>
+    </nav>
+
+    <main class="game-wrapper">
+        <div class="arena">
+            <h2>Roteamento de Dados</h2>
+
+            <div class="game-stats">
+                <div id="timer">Tempo: 0s</div>
+                <div id="score">Pontos: 0</div>
+            </div>
+
+            <div class="game-controls">
+                <button id="startBtn">Iniciar Desafio</button>
+                <button id="pauseBtn" style="display:none;">Pausar</button>
+                <button id="stopBtn" style="display:none;">Reiniciar</button>
+            </div>
+
+            <p>Arraste o pacote de dados para a infraestrutura ideal:</p>
+
+            <div class="cargo-element" id="packet" draggable="true">PACOTE: DADOS INTERCONTINENTAIS</div>
+
+            <div class="drop-zones">
+                <div class="zone" data-route="submarino">Cabo Submarino</div>
+                <div class="zone" data-route="fibra">Fibra Óptica</div>
+                <div class="zone" data-route="satelite">Satélite LEO</div>
+            </div>
+            <p id="msg" style="margin-top:20px; font-weight:bold;"></p>
+        </div>
+    </main>
+
+    <script src="js/game.js"></script>
+
+    <footer class="main-footer">
+        <p class="copyright">
+            © 2026 Além das Rodas. Dados via ANATEL e RNP. Design por IA Colaborativa.
+        </p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+/* ALÉM DAS RODAS - SANRIO KAWAII EDITION (FINAL) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+:root {
+    --primary: #ffafcc;      /* Rosa Soft */
+    --accent: #ff4d6d;       /* Vermelho Laço */
+    --secondary: #bde0fe;    /* Azul Cinnamoroll */
+    --success: #52b788;      /* Verde Keroppi */
+    --dark: #5a4a5e;         /* Roxo suave */
+    --bg: #fff0f5;           /* Lavender Blush */
+    --card: #ffffff;
+    --radius: 30px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Garante que o corpo não tenha scroll */
+/* Garante que o corpo não tenha scroll */
+.game-body {
+    background-color: var(--bg);
+    color: var(--dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    height: 100vh;      /* Altura exata da tela */
+    overflow: hidden;   /* BLOQUEIA A ROLAGEM */
+    display: flex;
+    flex-direction: column;
+}
+
+/* O wrapper ocupa o restante do espaço disponível sem estourar */
+.game-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden;   /* Impede scroll interno */
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid var(--primary);
+}
+
+.logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; }
+.logo strong { color: var(--accent); }
+
+.nav-game {
+    background: var(--primary);
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 4px 0px #ff88a8;
+    transition: 0.2s;
+}
+
+/* ARENA DE JOGO */
+.game-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.arena {
+    background: var(--card);
+    padding: 20px; /* Reduzido de 40px para 20px para ganhar espaço */
+    border-radius: var(--radius);
+    text-align: center;
+    width: 100%;
+    max-width: 500px; /* Um pouco menor para caber em qualquer celular */
+    box-shadow: 0 10px 30px rgba(255, 175, 204, 0.3);
+    border: 3px solid #ffe4e6;
+    max-height: 85vh; /* Garante que a arena não ultrapasse a tela */
+    overflow-y: auto; /* Permite scroll APENAS dentro da arena se necessário */
+}
+
+/* STATUS */
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    background: #fff5f8;
+    padding: 15px;
+    border-radius: 20px;
+    border: 2px dashed var(--primary);
+}
+
+#timer { color: var(--accent); }
+#score { color: var(--success); }
+
+/* BOTÕES */
+.game-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.game-controls button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#startBtn { background-color: var(--primary); color: white; box-shadow: 0 4px 0 #ff88a8; }
+#pauseBtn { background-color: var(--secondary); color: var(--dark); box-shadow: 0 4px 0 #90c2f2; }
+#stopBtn { background-color: #f1f5f9; color: var(--dark); box-shadow: 0 4px 0 #cbd5e1; }
+
+.game-controls button:hover { transform: translateY(-3px); }
+
+/* ELEMENTO E ZONAS */
+.cargo-element {
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 20px;
+    margin: 30px auto;
+    width: 250px;
+    border-radius: 20px;
+    cursor: grab;
+    font-weight: 800;
+    border: 3px solid #fff;
+    box-shadow: 0 6px 15px rgba(189, 224, 254, 0.5);
+}
+
+.drop-zones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.zone {
+    border: 3px dashed var(--primary);
+    padding: 20px 10px;
+    border-radius: 20px;
+    background: #fffafa;
+    font-weight: 700;
+    color: var(--dark);
+    transition: 0.3s;
+}
+
+.zone:hover { background: var(--primary); color: white; border-style: solid; }
+
+/* FOOTER */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    background: #ffffff;
+    border-top: 1px solid rgba(255, 133, 162, 0.1);
+}
+
+.main-footer .copyright {
+    font-size: 0.7rem;
+    color: #94a3b8;
+}
+
+/* RESPONSIVIDADE */
+@media (max-height: 700px) {
+    .arena {
+        padding: 15px;
+        transform: scale(0.9); /* Diminui levemente a escala se a tela for muito baixa */
+    }
+    
+    .cargo-element {
+        margin: 15px auto;
+        padding: 15px;
+    }
+    
+    .drop-zones {
+        margin-top: 15px;
+    }
+}
