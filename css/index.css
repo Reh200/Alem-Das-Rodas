@@ -1,106 +1,155 @@
-/* ALÉM DAS RODAS - EDITORIAL DESIGN V7.1 */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Montserrat:wght@700;800&display=swap');
+/* 🎀 ALÉM DAS RODAS - SANRIO CORE STYLE V8.1 (CLEAN HEADER) 🎀 */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Montserrat:wght@800&display=swap');
 
 :root {
-    --primary: #ff85a2;
-    --dark: #1e1b26;
-    --bg: #f8f7f9;
-    --card: #ffffff;
-    --text-main: #334155;
-    --radius: 20px;
+    --primary-pink: #ffb7c5;    /* Rosa Hello Kitty */
+    --soft-pink: #ffe5ec;       /* Fundo My Melody */
+    --accent-blue: #bde0fe;     /* Cinnamoroll Blue */
+    --accent-yellow: #fff4ad;   /* Pompompurin Yellow */
+    --white: #ffffff;
+    --text-dark: #5b4b4f;       /* Marrom suave */
+    --border-radius: 35px;      
+    --shadow: 0 8px 0px rgba(255, 183, 197, 0.3); 
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* ☁️ Ajuste para o Footer sempre baixo ☁️ */
 html, body {
     height: 100%;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--bg);
-    color: var(--text-main);
 }
 
-/* Layout em Grid para ancorar o Footer */
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--soft-pink);
+    background-image: radial-gradient(var(--primary-pink) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: var(--text-dark);
+}
+
 .page-container {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa a altura total da tela */
 }
 
-/* NAVBAR EDITORIAL */
+/* 🎀 NAVBAR SEM BORDA 🎀 */
 .navbar {
+    background: var(--white);
+    padding: 20px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 8%;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: none; /* Borda removida como pedido */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; letter-spacing: -1px; }
-.logo strong { color: var(--primary); }
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+}
 
-.nav-game { 
-    background: var(--dark); 
-    color: white !important; 
-    padding: 10px 25px; 
-    border-radius: 40px; 
-    font-size: 0.85rem; 
+.logo strong {
+    color: var(--primary-pink);
+    text-shadow: 2px 2px var(--accent-yellow);
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-menu a {
     text-decoration: none;
-    transition: transform 0.2s;
+    color: var(--text-dark);
+    font-weight: 700;
 }
 
-/* CONTAINER DO BLOG */
-.container { 
-    width: 90%; 
-    max-width: 1100px; 
-    margin: 40px auto; 
+.nav-game {
+    background: var(--primary-pink);
+    color: white !important;
+    padding: 10px 25px;
+    border-radius: 50px;
+    box-shadow: 0 4px 0 #e08ea0;
+}
+
+/* ☁️ HERO SECTION ☁️ */
+.hero {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--white);
+    margin: 20px auto;
+    width: 90%;
+    border-radius: var(--border-radius);
+    border: 3px dashed var(--primary-pink);
+}
+
+.hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: var(--text-dark);
+}
+
+/* 💖 FEED DE BLOG 💖 */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    flex-grow: 1; /* Faz o conteúdo crescer para empurrar o footer */
 }
 
 .blog-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
+    padding-bottom: 40px;
 }
 
-/* CARDS SOFISTICADOS */
+/* ✨ CARDS ✨ */
 .blog-post {
-    background: var(--card);
-    padding: 2rem;
-    border-radius: var(--radius);
-    border: 1px solid rgba(0,0,0,0.05);
-    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 10px;
+    border: 3px solid var(--accent-blue);
+    box-shadow: var(--shadow);
 }
 
-.blog-post:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+details { padding: 15px; }
+summary { cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+
+.post-thumb {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 25px;
 }
 
-.post-thumb { 
-    width: 100%; 
-    height: 200px; 
-    object-fit: cover; 
-    border-radius: 12px; 
-    margin-bottom: 20px; 
+/* 🍦 FOOTER NO CHÃO 🍦 */
+.main-footer {
+    text-align: center;
+    padding: 30px;
+    background: var(--white);
+    border-top: 5px solid var(--accent-yellow);
+    width: 100%;
 }
 
-.blog-post h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.3rem;
-    margin-bottom: 12px;
-    color: var(--dark);
+.copyright {
+    font-weight: 700;
+    color: var(--primary-pink);
+    font-size: 0.8rem;
 }
 
-.summary-text { font-size: 0.95rem; line-height: 1.7; color: #64748b; }
-
-/* FOOTER */
-.main-footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #94a3b8; }
-
-/* AJUSTES RESPONSIVOS (O PULO DO GATO) */
-@media (max-width: 600px) {
-    .navbar { padding: 15px 5%; }
-    .blog-feed { grid-template-columns: 1fr; }
-    .blog-post { padding: 1.5rem; }
-    .nav-game { padding: 8px 15px; font-size: 0.75rem; }
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; gap: 15px; text-align: center; }
 }

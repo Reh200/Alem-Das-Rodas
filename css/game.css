@@ -33,7 +33,6 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     overflow: hidden; /* Remove barras de rolagem */
 }
-
 .arena {
     background: var(--card);
     padding: 20px;
