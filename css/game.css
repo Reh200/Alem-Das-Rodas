@@ -23,31 +23,17 @@
     box-sizing: border-box;
 }
 
-/* 1. Ajuste no corpo para não permitir rolagem */
 .game-body {
     background-color: var(--bg);
-    height: 100vh;
+    min-height: 100vh; /* Usa min-height para garantir que o site tenha pelo menos a altura da tela */
     width: 100vw;
-    overflow: hidden;
-    /* Isso remove qualquer barra de rolagem */
-    display: flex;
-    flex-direction: column;
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* [Navbar] [Conteúdo do Jogo] [Footer] */
     font-family: 'Plus Jakarta Sans', sans-serif;
-    /* Fonte padrão do jogo */
+    overflow: hidden; /* Remove barras de rolagem */
 }
 
-/* 2. Ajuste do Wrapper para ocupar o centro sem estourar */
-.game-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-/* 3. Ajuste da Arena para telas pequenas */
 .arena {
     background: var(--card);
     padding: 20px;
@@ -62,45 +48,62 @@
     box-shadow: 0 10px 30px rgba(255, 175, 204, 0.3);
 }
 
-/* 4. Ajuste dos elementos internos para mobile */
-@media (max-width: 480px) {
-    .arena {
-        padding: 15px;
-    }
+/* --- RESPONSIVIDADE TOTAL DO JOGO (FIXO) --- */
 
-    .cargo-element {
-        width: 100%;
-        /* Ocupa a largura disponível */
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .drop-zones {
-        gap: 10px;
-    }
-
-    .zone {
-        padding: 15px 5px;
-        font-size: 0.75rem;
-        /* Fonte menor para caber */
-    }
-
-    .game-stats {
-        font-size: 0.9rem;
-        padding: 10px;
-    }
-}
-
-/* NAVBAR */
+/* 1. Navbar que não quebra */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(15px);
-    border-bottom: 2px solid var(--primary);
+    padding: 0 5%;
+    height: 60px; /* Menor em mobile */
+    flex-wrap: nowrap; /* Impede quebra de linha */
+}
+
+/* 2. Botão "Voltar ao Blog" compacto */
+.nav-game {
+    white-space: nowrap;
+    padding: 6px 12px !important;
+    font-size: 0.75rem !important;
+}
+
+.game-wrapper {
+    grid-row-start: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 4. Ajustes finos para telas muito pequenas */
+@media (max-width: 480px) {
+    .logo { font-size: 0.9rem; }
+    
+    .arena {
+        width: 95%;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    .cargo-element {
+        font-size: 0.9rem;
+        padding: 15px 10px;
+    }
+
+    .zone {
+        font-size: 0.7rem; /* Fonte menor para caber nas zonas */
+        padding: 10px 2px;
+    }
+
+    .game-controls {
+        flex-direction: row; /* Mantém na linha */
+        gap: 5px;
+    }
+
+    .game-controls button {
+        padding: 8px 12px !important;
+        font-size: 0.75rem !important;
+    }
 }
 
 .logo {
@@ -262,6 +265,7 @@
 
 /* FOOTER */
 .main-footer {
+    grid-row-start: 3;
     text-align: center;
     padding: 20px;
     background: #ffffff;

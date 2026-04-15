@@ -130,20 +130,30 @@ summary::-webkit-details-marker { display: none; }
     .main-footer { padding: 30px 15px; }
 }
 
-/* 2. Ajustes Específicos para Telas Muito Pequenas (Abaixo de 480px) */
+/* 2. Ajustes para Telas Muito Pequenas (Otimizado para leitura) */
 @media (max-width: 480px) {
-    .nav-menu { gap: 15px; }
-    .nav-menu a { font-size: 0.8rem; }
+    /* Aumentamos a fonte mínima de 0.8rem para 0.95rem para ficar confortável */
+    .nav-menu { gap: 10px; }
+    .nav-menu a { font-size: 0.95rem; }
     
-    /* Remove elementos decorativos se necessário */
-    .hero { padding: 30px 15px; }
+    /* Hero: Títulos grandes em telas pequenas podem quebrar tudo, 
+       ajustamos o padding para o texto ter espaço lateral */
+    .hero { padding: 40px 20px; }
+    .hero h1 { font-size: 1.4rem !important; line-height: 1.3; }
+
+    /* Aumentamos levemente o tamanho do texto do corpo */
+    body { font-size: 16px; padding: 0 10px; }
     
-    /* Ajuste de margens globais */
-    body { padding: 0; }
-    
-    /* Otimização do footer */
+    /* Otimização do footer: mantemos o tamanho legível */
     .main-footer .copyright {
-        font-size: 0.65rem;
-        line-height: 1.3;
+        font-size: 0.8rem; /* Aumentado de 0.65 para 0.8 */
+        line-height: 1.5;
+        padding: 10px;
+    }
+
+    /* Garantir que botões (se houver) sejam fáceis de tocar */
+    button, .nav-game {
+        padding: 12px 20px !important;
+        font-size: 0.9rem !important;
     }
 }
