@@ -12,12 +12,7 @@
     --shadow-sticker: 0 8px 0px rgba(255, 183, 197, 0.3);
 }
 
-/* ☁️ ESTRUTURA GERAL ☁️ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Quicksand', sans-serif;
@@ -25,261 +20,84 @@ body {
     background-image: radial-gradient(var(--primary-pink) 1px, transparent 1px);
     background-size: 30px 30px;
     color: var(--text-dark);
-
-    /* Faz o footer ficar sempre no final */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* 🎀 NAVBAR CLEAN (SEM BORDA) 🎀 */
+/* 🎀 NAVBAR 🎀 */
 .navbar {
     background: var(--white);
     padding: 15px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: none;
-    /* Borda removida */
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
-}
+.logo { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; }
+.logo strong { color: var(--primary-pink); text-shadow: 1.5px 1.5px var(--accent-yellow); }
+.nav-menu { list-style: none; display: flex; gap: 20px; }
+.nav-menu a { text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; }
+.nav-game { background: var(--primary-pink); color: white !important; padding: 8px 15px; border-radius: 50px; box-shadow: 0 4px 0 #e08ea0; }
 
-.logo strong {
-    color: var(--primary-pink);
-    text-shadow: 1.5px 1.5px var(--accent-yellow);
-}
+/* ✨ HERO ✨ */
+.hero { padding: 30px 20px; text-align: center; background: var(--white); margin: 20px auto; width: 90%; max-width: 1100px; border-radius: var(--radius); border: 3.5px dashed var(--primary-pink); }
 
-.nav-menu {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
+/* 💖 FEED 💖 */
+.container { flex: 1; width: 95%; max-width: 1200px; margin: 0 auto 50px auto; }
+.blog-feed { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 
-.nav-menu a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-.nav-game {
-    background: var(--primary-pink);
-    color: white !important;
-    padding: 8px 15px;
-    border-radius: 50px;
-    box-shadow: 0 4px 0 #e08ea0;
-}
-
-/* ✨ HERO SECTION ✨ */
-.hero {
-    padding: 30px 20px;
-    text-align: center;
-    background: var(--white);
-    margin: 20px auto;
-    width: 90%;
-    max-width: 1100px;
-    border-radius: var(--radius);
-    border: 3.5px dashed var(--primary-pink);
-}
-
-.hero h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    margin-top: 10px;
-}
-
-/* 💖 FEED COM 3 COLUNAS 💖 */
-.container {
-    flex: 1;
-    /* Preenche o espaço para empurrar o footer */
-    width: 95%;
-    max-width: 1200px;
-    margin: 0 auto 50px auto;
-}
-
-.blog-feed {
-    display: grid;
-    /* 3 colunas por padrão */
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-/* ✨ CARDS ✨ */
-.blog-post {
+/* ✨ CARDS (AJUSTADOS PARA ISOLAR CONTEÚDO) ✨ */
+.blog-post, .featured-video {
     background: var(--white);
     border-radius: var(--radius);
-    padding: 18px;
+    padding: 20px;
     border: 3px solid var(--accent-blue);
     box-shadow: var(--shadow-sticker);
     transition: transform 0.2s;
-    display: flex;
-    flex-direction: column;
 }
 
-.blog-post:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-pink);
-}
+.blog-post:hover, .featured-video:hover { transform: translateY(-5px); border-color: var(--primary-pink); }
 
-.post-meta {
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: var(--primary-pink);
-    margin-bottom: 8px;
-}
-
-.post-thumb {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 20px;
-    margin: 10px 0;
-}
-
-summary h2 {
-    font-size: 0.95rem;
-    line-height: 1.3;
-}
-
-.summary-text {
-    font-size: 0.8rem;
-    margin-top: 10px;
-    line-height: 1.4;
-}
-
-/* 🍦 FOOTER ANCORADO NA BASE 🍦 */
-.main-footer {
-    background: var(--white);
-    padding: 20px;
-    border-top: 5px solid var(--accent-yellow);
-    text-align: center;
-    margin-top: auto;
-    /* Força o footer para o final do flex container */
-}
-
-.copyright {
-    color: var(--primary-pink);
-    font-weight: 700;
-    font-size: 0.7rem;
-}
-
-/* 🎥 CONTROLE TOTAL DO VÍDEO-RESUMO */
-
-/* Card específico do vídeo */
-.featured-video {
-    max-height: 450px;
-    /* Impede que o card fique muito comprido */
-    display: flex;
-    flex-direction: column;
-}
-
-/* Container do player */
-.video-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    /* Mantém o formato wide de cinema */
-    max-height: 200px;
-    /* Limita a altura da imagem/vídeo no card */
-    border-radius: 18px;
-    overflow: hidden;
-    background: #000;
-    border: 3px solid var(--soft-pink);
-    margin: 8px 0;
-}
-
-/* 🎥 CSS OTIMIZADO PARA FEED VERTICAL */
-
-/* O Player: Mantém proporção e não invade a tela */
-.video-player {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    display: block;
-    border-radius: 18px; /* Mantém o arredondamento mesmo no player */
-    /* Garante que o clique não dispare o modo tela cheia do sistema */
-    pointer-events: auto; 
-}
-
-/* O Container do vídeo: Define o tamanho fixo para o layout vertical */
-.video-container {
-    width: 100%;
-    height: 220px; /* Altura fixa para todos os vídeos, mantendo o alinhamento vertical */
-    background: #000;
-    border-radius: 18px;
-    margin: 10px 0;
-    overflow: hidden;
-    border: 3px solid var(--soft-pink);
-    flex-shrink: 0; /* Impede que o vídeo encolha se o texto for grande */
-}
-
-/* 🎀 AJUSTE DO CARD DE VÍDEO NO FEED VERTICAL 🎀 */
-
-/* Remove a marcação padrão do <details> */
-.featured-video summary {
-    list-style: none;
-    cursor: pointer;
-}
-.featured-video summary::-webkit-details-marker {
-    display: none;
-}
-
-.video-container {
-    width: 100%;
-    /* Se o vídeo for vertical, tente uma proporção 9:16 ou altura fixa */
-    height: 450px; 
-    margin-top: 15px;
-    border-radius: 20px;
-    overflow: hidden;
-    background: #000;
-    border: 3px solid var(--soft-pink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* Removemos o aspect-ratio fixo para permitir altura personalizada */
-    aspect-ratio: auto; 
-}
-
-/* Player que se adapta ao container */
-.video-player {
-    width: 100%;
-    height: 100%;
-    /* 'contain' garante que o vídeo inteiro apareça sem cortes */
-    object-fit: contain; 
-    display: block;
-    background-color: #000; /* Define a cor das faixas se houver sobras */
-}
-
-/* Garante que o card expandido não fique gigante */
-.featured-video .full-content {
+/* IMPORTANTE: ESTAS REGRAS ESCONDEM O CONTEÚDO */
+.blog-post .full-content, .featured-video .full-content {
+    display: none; /* Esconde por padrão */
     margin-top: 15px;
     padding-top: 15px;
     border-top: 2px dashed var(--soft-pink);
 }
 
+.blog-post details[open] .full-content, 
+.featured-video details[open] .full-content {
+    display: block; /* Mostra apenas quando aberto */
+}
+
+summary { cursor: pointer; list-style: none; outline: none; }
+summary::-webkit-details-marker { display: none; }
+
+.post-meta { font-size: 0.65rem; font-weight: 800; color: var(--primary-pink); margin-bottom: 8px; }
+.post-thumb { width: 100%; height: 180px; object-fit: cover; border-radius: 20px; margin: 10px 0; display: block; }
+h2 { font-size: 1rem; line-height: 1.3; }
+.summary-text { font-size: 0.8rem; margin-top: 10px; }
+
+/* 🎥 VÍDEO */
+.video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border-radius: 18px;
+    margin: 10px 0;
+    display: flex;
+}
+.video-player { width: 100%; height: 100%; object-fit: contain; border-radius: 18px; }
+
+/* 🍦 FOOTER 🍦 */
+.main-footer { background: var(--white); padding: 20px; border-top: 5px solid var(--accent-yellow); text-align: center; margin-top: auto; }
+.copyright { color: var(--primary-pink); font-weight: 700; font-size: 0.7rem; }
+
 /* 📱 RESPONSIVIDADE */
-@media (max-width: 992px) {
-    .blog-feed {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 colunas em tablets */
-    }
-}
-
-@media (max-width: 600px) {
-    .blog-feed {
-        grid-template-columns: 1fr;
-        /* 1 coluna em celulares para não esmagar */
-    }
-
-    .hero h1 {
-        font-size: 1.2rem;
-    }
-}
+@media (max-width: 768px) { .blog-feed { grid-template-columns: 1fr; } }
